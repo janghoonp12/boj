@@ -1,23 +1,15 @@
-from sys import stdin
-I = stdin.readline
+def function(h, w, arr):
+    ans = 0
+    prefix = arr[0]
+    suffix = arr[-1]
+    m = max(arr)
+    for i in range(w):
+        prefix = max(prefix, arr[i])
+        suffix = max(suffix, arr[w - i - 1])
+        ans += prefix + suffix - arr[i] - m
+    return ans
 
-H, W = map(int, I().split())
-arr = list(map(int, I().split()))
 
-S = sum(arr)
-M = max(arr)
-T = M * W
-prefix = 0
-suffix = 0
-m_p = arr[0]
-m_s = arr[W-1]
-for i in range(W):
-    if arr[i] > m_p:
-        m_p = arr[i]
-    if arr[W-1-i] > m_s:
-        m_s = arr[W-1-i]        
-    prefix += m_p
-    suffix += m_s
-rain = prefix + suffix - T - S
-
-print(rain)
+h, w = map(int, input().split())
+arr = list(map(int, input().split()))
+print(function(h, w, arr))
