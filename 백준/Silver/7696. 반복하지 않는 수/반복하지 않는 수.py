@@ -1,20 +1,33 @@
-db = [0 for i in range(1000001)]
-idx = 1
-k = 0
-while idx < 1000001:
-    k += 1
-    t = k
-    arr = []
-    while t != 0:
-        r = t % 10
-        arr.append(r)
-        t //= 10
-    if len(arr) == len(set(arr)):
-        db[idx] = k
-        idx += 1
+import sys
 
+L = []
 while True:
-    n = int(input())
+    n = int(sys.stdin.readline())
+    L.append(n)
     if n == 0:
         break
-    print(db[n])
+
+M = max(L)
+nums = [0] * (M + 1)
+i = 1
+idx = 1
+while idx <= M:
+    check = []
+    d = 10
+    k = i
+    while(k>0):
+        check.append(k%d)
+        k = k//d
+
+
+    # print(check)
+    if len(set(check)) == len(check):
+        nums[idx] = i
+        idx += 1
+    i += 1
+
+
+for l in L:
+    if l == 0:
+        break
+    print(nums[l])
