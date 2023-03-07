@@ -1,10 +1,7 @@
-from sys import stdin
-I = stdin.readline
-
-a, b, c = map(int, I().split())
-A = list(map(int, I().split()))
-B = list(map(int, I().split()))
-C = sorted(list(map(int, I().split())))
+a, b, c = map(int, input().split())
+A = list(map(int, input().split()))
+B = list(map(int, input().split()))
+C = sorted(list(map(int, input().split())))
 D = 200000000
 
 for i in A:
