@@ -1,35 +1,37 @@
-def recur(cur, cost):
+def recur(cur, total):
     global ans
     
-    if cur == N:
-        ans = min(ans, cost)
+    if total > ans:
         return
     
-    for i in range(N):
+    if cur == n:
+        ans = min(ans, total)
+        return
+    
+    for i in range(n):
         if visited[i]:
             continue
         
         visited[i] = True
-        for info in sale_info[i]:
-            price[info[0] - 1] -= info[1]
-        recur(cur + 1, cost + max(1, price[i]))
+        for j in range(len(arr[i])):
+            cost[arr[i][j][0] - 1] -= arr[i][j][1]
+        recur(cur + 1, total + max(cost[i], 1))
         visited[i] = False
-        for info in sale_info[i]:
-            price[info[0] - 1] += info[1]
+        for j in range(len(arr[i])):
+            cost[arr[i][j][0] - 1] += arr[i][j][1]
+        
 
 
-N = int(input())
-price = list(map(int, input().split()))
-sale = [0] * N
-sale_info = [[] for i in range(N)]
-for i in range(N):
-    sale[i] = p = int(input())
-    for j in range(p):
-        sale_info[i].append(tuple(map(int, input().split())))
+n = int(input())
+cost = list(map(int, input().split()))
+arr = [[] for i in range(n)]
 
-visited = [False] * N
-ans = sum(price)
+for i in range(n):
+    m = int(input())
+    arr[i] = [list(map(int, input().split())) for i in range(m)]
+
+ans = 10000
+visited = [False for i in range(n)]
 
 recur(0, 0)
-
 print(ans)
