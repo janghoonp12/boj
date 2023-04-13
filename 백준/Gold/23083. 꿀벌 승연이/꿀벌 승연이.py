@@ -14,14 +14,16 @@ dx = [[0, 1, 1], [-1, 0, 1]]
 dy = [[1, 1, 0], [1, 1, 0]]
 
 for y in range(1, m + 1):
+    yy = y % 2
     for x in range(1, n + 1):
         if arr[x][y] == -1:
             continue
         for k in range(3):
-            nx = x + dx[y % 2][k]
-            ny = y + dy[y % 2][k]
+            nx = x + dx[yy][k]
+            ny = y + dy[yy][k]
             if not (0 < nx <= n and  0 < ny <= m) or arr[nx][ny] == -1:
                 continue
             arr[nx][ny] += arr[x][y]
+            arr[nx][ny] %= 10**9 + 7
 
-print(arr[n][m] % (10**9 + 7))
+print(arr[n][m])
